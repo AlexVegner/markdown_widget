@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 import 'package:markdown/markdown.dart' as m;
+import 'package:video_player/video_player.dart';
+
 import '../config/style_config.dart';
 
 ///Tag: video(this is not markdown's tag)
@@ -86,7 +87,7 @@ class _VideoWidgetState extends State<VideoWidget> {
   @override
   Widget build(BuildContext context) {
     final config = widget.config;
-    final initialized = _videoPlayerController.value.initialized;
+    final initialized = _videoPlayerController.value.isInitialized;
     final isPlaying = _videoPlayerController.value.isPlaying;
     final aspectRatio =
         config?.aspectRatio ?? _videoPlayerController.value.aspectRatio;
