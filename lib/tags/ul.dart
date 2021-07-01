@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:markdown/markdown.dart' as m;
+
 import '../config/style_config.dart';
 import 'markdown_tags.dart';
 import 'p.dart';
@@ -8,16 +9,16 @@ import 'p.dart';
 class Ul {
   Ul._internal();
 
-  static Ul _instance;
+  static Ul? _instance;
 
   factory Ul() {
     _instance ??= Ul._internal();
-    return _instance;
+    return _instance!;
   }
 
   ///the unOrderly list widget
   Widget getUlWidget(m.Element rootNode, int deep) {
-    final children = rootNode?.children;
+    final children = rootNode.children;
     if (children == null) return Container();
     return Column(
       children: List.generate(
@@ -35,7 +36,7 @@ class Ul {
   }
 
   Widget _getLiWidget(m.Element rootNode, int deep, int index) {
-    final children = rootNode?.children;
+    final children = rootNode.children!;
     final List<m.Node> otherTagNodes = [];
     final isSolid = deep % 2 == 0;
     List<Widget> listChildren = [];
@@ -51,8 +52,8 @@ class Ul {
         otherTagNodes.add(node);
     }
     final config = StyleConfig().ulConfig;
-    final Widget dotWidget =
-        StyleConfig()?.ulConfig?.dotWidget?.call(deep, index);
+    final Widget? dotWidget =
+        StyleConfig().ulConfig?.dotWidget?.call(deep, index);
     final ulChild = Container(
       margin: EdgeInsets.only(
           left: config?.textConfig?.textDirection == TextDirection.rtl
@@ -99,7 +100,7 @@ class Ul {
       margin: config?.dotMargin ??
           EdgeInsets.only(left: 5, right: 5, top: marginTop),
       decoration: BoxDecoration(
-        border: isSolid ? null : Border.all(color: defaultUlDotColor),
+        border: isSolid ? null : Border.all(color: defaultUlDotColor!),
         shape: BoxShape.circle,
         color: isSolid ? defaultUlDotColor : null,
       ),
@@ -108,15 +109,15 @@ class Ul {
 }
 
 class UlConfig {
-  final TextStyle textStyle;
-  final TextConfig textConfig;
-  final DotWidget dotWidget;
-  final UlWrapper ulWrapper;
-  final double leftSpacing;
-  final double dotSize;
-  final bool selectable;
-  final EdgeInsetsGeometry dotMargin;
-  final CrossAxisAlignment crossAxisAlignment;
+  final TextStyle? textStyle;
+  final TextConfig? textConfig;
+  final DotWidget? dotWidget;
+  final UlWrapper? ulWrapper;
+  final double? leftSpacing;
+  final double? dotSize;
+  final bool? selectable;
+  final EdgeInsetsGeometry? dotMargin;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   UlConfig({
     this.textStyle,
